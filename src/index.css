@@ -10,11 +10,20 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('/fonts/DungGeunMo.woff2') format('woff2'),
+         url('/fonts/DungGeunMo.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     color-scheme: light;
     background-color: #d8d8d8;
     color: #111111;
-    font-family: 'ChicagoFLF', 'Geneva', 'Lucida Console', monospace;
+    font-family: 'ChicagoFLF', 'DungGeunMo', 'Geneva', 'Lucida Console', monospace;
 }
 
 html,
