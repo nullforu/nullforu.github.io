@@ -231,16 +231,23 @@ function App() {
                     onCloseAll={closeAllWindows}
                     onResetWindows={resetWindows}
                 />
-                <div ref={desktopRef} className='desktop-pattern relative h-[calc(100vh-32px)] overflow-hidden'>
-                    <div className='absolute left-6 top-8 grid w-24 gap-6'>
-                        {DESKTOP_ICONS.map((icon) => (
-                            <DesktopIcon
-                                key={icon.id}
-                                label={icon.label}
-                                icon={icon.icon}
-                                onOpen={() => openWindow(icon.id)}
-                            />
-                        ))}
+                <div ref={desktopRef} className='desktop-pattern relative' style={{ height: 'calc(100% - 32px)' }}>
+                    <div className='absolute inset-0 pl-6 pt-8 overflow-hidden pointer-events-none'>
+                        <div
+                            className='grid h-full w-full auto-cols-[5rem] grid-flow-col gap-y-2 gap-x-6 pointer-events-auto'
+                            style={{
+                                gridTemplateRows: 'repeat(auto-fill, 5.5rem)',
+                            }}
+                        >
+                            {DESKTOP_ICONS.map((icon) => (
+                                <DesktopIcon
+                                    key={icon.id}
+                                    label={icon.label}
+                                    icon={icon.icon}
+                                    onOpen={() => openWindow(icon.id)}
+                                />
+                            ))}
+                        </div>
                     </div>
 
                     {WINDOW_DEFINITIONS.map((def) => {
