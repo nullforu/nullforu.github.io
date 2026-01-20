@@ -30,6 +30,17 @@ body {
     color: #111111;
 }
 
+*:focus,
+*:focus-visible {
+    outline: none;
+}
+
+button,
+[role='button'],
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .desktop-pattern {
     background-color: #d8d8d8;
     background-image:
