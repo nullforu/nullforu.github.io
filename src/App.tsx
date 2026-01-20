@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import DesktopIcon from './components/DesktopIcon'
+import MenuBar from './components/MenuBar'
 import Window from './components/Window'
 import {
     AboutContent,
@@ -68,6 +69,31 @@ function App() {
                     z: maxZ + 1,
                 },
             }
+        })
+    }
+
+    const closeAllWindows = () => {
+        setWindowState((prev) => {
+            const next = { ...prev }
+            Object.keys(next).forEach((key) => {
+                const windowId = key as WindowId
+                next[windowId] = { ...next[windowId], open: false }
+            })
+            return next
+        })
+    }
+
+    const resetWindows = () => {
+        setWindowState((prev) => {
+            const next = { ...prev }
+            WINDOW_DEFINITIONS.forEach((def) => {
+                next[def.id] = {
+                    ...next[def.id],
+                    pos: def.defaultPos,
+                    size: def.size,
+                }
+            })
+            return next
         })
     }
 
@@ -197,16 +223,12 @@ function App() {
                     height: `calc(100% / ${scale})`,
                 }}
             >
-                <div className='flex h-8 items-center justify-between border-b-2 border-mac-ink bg-mac-paper px-3 text-[12px]'>
-                    <div className='flex items-center gap-4'>
-                        <span className='text-[14px]'></span>
-                        <span>File</span>
-                        <span>Edit</span>
-                        <span>View</span>
-                        <span>Special</span>
-                    </div>
-                    <div className='hidden text-[11px] sm:block'>세명컴퓨터고등학교 Null4U</div>
-                </div>
+                <MenuBar
+                    compact={compact}
+                    onOpenWindow={openWindow}
+                    onCloseAll={closeAllWindows}
+                    onResetWindows={resetWindows}
+                />
                 <div ref={desktopRef} className='desktop-pattern relative h-[calc(100vh-32px)] overflow-hidden'>
                     <div className='absolute left-6 top-8 grid w-24 gap-6'>
                         {DESKTOP_ICONS.map((icon) => (
