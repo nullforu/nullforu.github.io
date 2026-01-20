@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'ChicagoFLF';
+    src: url('/fonts/ChicagoFLF.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    color-scheme: light;
+    background-color: #d8d8d8;
+    color: #111111;
+    font-family: 'ChicagoFLF', 'Geneva', 'Lucida Console', monospace;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #d8d8d8;
+    color: #111111;
+}
+
+.desktop-pattern {
+    background-color: #d8d8d8;
+    background-image:
+        repeating-linear-gradient(45deg, #cfcfcf 0 2px, #d8d8d8 2px 4px),
+        repeating-linear-gradient(-45deg, #d0d0d0 0 2px, #d8d8d8 2px 4px);
+}
+
+.mac-titlebar {
+    height: 22px;
+    border-bottom: 2px solid #111111;
+    background-image: repeating-linear-gradient(90deg, #111111 0 2px, #f7f7f7 2px 4px);
+}
+
+.mac-scroll {
+    scrollbar-width: none;
+    scrollbar-color: #111111 #f7f7f7;
+}
+
+.mac-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.mac-scroll::-webkit-scrollbar-track {
+    background: #f7f7f7;
+    border-left: 1px solid #111111;
+}
+
+.mac-scroll::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border: 2px solid #111111;
+}
+
+.mac-scroll::-webkit-scrollbar-thumb:hover {
+    background: #dcdcdc;
+}
+
+.mac-scroll-track {
+    border: 1px solid #111111;
+    background: repeating-linear-gradient(180deg, #111111 0 2px, #f7f7f7 2px 4px);
+}
+
+.mac-scroll-thumb {
+    width: 100%;
+    border: 1px solid #111111;
+    background: #ffffff;
+    box-shadow: inset -1px -1px 0 #111111;
+    touch-action: none;
+    cursor: grab;
+}
+
+.mac-scroll-thumb:active {
+    cursor: grabbing;
+}
+
+.mac-resize-handle {
+    border: 1px solid #111111;
+    background: repeating-linear-gradient(135deg, #111111 0 2px, #f7f7f7 2px 4px);
+    cursor: nwse-resize;
+    touch-action: none;
+}
+
+.pixel {
+    image-rendering: pixelated;
+}
