@@ -18,6 +18,7 @@ function App() {
     const desktopRef = useRef<HTMLDivElement>(null)
     const [compact, setCompact] = useState(false)
     const [viewport, setViewport] = useState({ w: 0, h: 0 })
+    const scale = compact ? 1 : 1.5
 
     useEffect(() => {
         const handleResize = () => {
@@ -27,6 +28,18 @@ function App() {
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        const applyTabIndex = () => {
+            document.querySelectorAll<HTMLElement>('*').forEach((node) => {
+                node.setAttribute('tabindex', '-1')
+            })
+        }
+        applyTabIndex()
+        const observer = new MutationObserver(() => applyTabIndex())
+        observer.observe(document.body, { childList: true, subtree: true })
+        return () => observer.disconnect()
     }, [])
 
     const [windowState, setWindowState] = useState<Record<WindowId, WindowState>>(() =>
@@ -176,53 +189,62 @@ function App() {
 
     return (
         <div className='h-screen w-full select-none overflow-hidden text-mac-ink'>
-            <div className='flex h-8 items-center justify-between border-b-2 border-mac-ink bg-mac-paper px-3 text-[12px]'>
-                <div className='flex items-center gap-4'>
-                    <span className='text-[14px]'></span>
-                    <span>File</span>
-                    <span>Edit</span>
-                    <span>View</span>
-                    <span>Special</span>
+            <div
+                className='h-full w-full origin-top-left'
+                style={{
+                    transform: `scale(${scale})`,
+                    width: `calc(100% / ${scale})`,
+                    height: `calc(100% / ${scale})`,
+                }}
+            >
+                <div className='flex h-8 items-center justify-between border-b-2 border-mac-ink bg-mac-paper px-3 text-[12px]'>
+                    <div className='flex items-center gap-4'>
+                        <span className='text-[14px]'></span>
+                        <span>File</span>
+                        <span>Edit</span>
+                        <span>View</span>
+                        <span>Special</span>
+                    </div>
+                    <div className='hidden text-[11px] sm:block'>세명컴퓨터고등학교 Null4U</div>
                 </div>
-                <div className='hidden text-[11px] sm:block'>세명컴퓨터고등학교 Null4U</div>
-            </div>
-            <div ref={desktopRef} className='desktop-pattern relative h-[calc(100vh-32px)] overflow-hidden'>
-                <div className='absolute left-6 top-8 grid w-24 gap-6'>
-                    {DESKTOP_ICONS.map((icon) => (
-                        <DesktopIcon
-                            key={icon.id}
-                            label={icon.label}
-                            icon={icon.icon}
-                            onOpen={() => openWindow(icon.id)}
-                        />
-                    ))}
-                </div>
+                <div ref={desktopRef} className='desktop-pattern relative h-[calc(100vh-32px)] overflow-hidden'>
+                    <div className='absolute left-6 top-8 grid w-24 gap-6'>
+                        {DESKTOP_ICONS.map((icon) => (
+                            <DesktopIcon
+                                key={icon.id}
+                                label={icon.label}
+                                icon={icon.icon}
+                                onOpen={() => openWindow(icon.id)}
+                            />
+                        ))}
+                    </div>
 
-                {WINDOW_DEFINITIONS.map((def) => {
-                    const state = windowState[def.id]
-                    if (!state?.open) return null
-                    return (
-                        <Window
-                            key={def.id}
-                            title={def.title}
-                            subtitle={def.subtitle}
-                            size={state.size}
-                            minSize={def.size}
-                            maxSize={WINDOW_MAX_SIZE[def.id] ?? def.size}
-                            open={state.open}
-                            zIndex={state.z}
-                            position={state.pos}
-                            onClose={() => closeWindow(def.id)}
-                            onFocus={() => bringToFront(def.id)}
-                            onMove={(pos) => updatePosition(def.id, pos)}
-                            onResize={(size) => updateSize(def.id, size)}
-                            boundsRef={desktopRef}
-                            compact={compact}
-                        >
-                            {windowContent[def.id]}
-                        </Window>
-                    )
-                })}
+                    {WINDOW_DEFINITIONS.map((def) => {
+                        const state = windowState[def.id]
+                        if (!state?.open) return null
+                        return (
+                            <Window
+                                key={def.id}
+                                title={def.title}
+                                subtitle={def.subtitle}
+                                size={state.size}
+                                minSize={def.size}
+                                maxSize={WINDOW_MAX_SIZE[def.id] ?? def.size}
+                                open={state.open}
+                                zIndex={state.z}
+                                position={state.pos}
+                                onClose={() => closeWindow(def.id)}
+                                onFocus={() => bringToFront(def.id)}
+                                onMove={(pos) => updatePosition(def.id, pos)}
+                                onResize={(size) => updateSize(def.id, size)}
+                                boundsRef={desktopRef}
+                                compact={compact}
+                            >
+                                {windowContent[def.id]}
+                            </Window>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
