@@ -286,54 +286,56 @@ const Window = ({
             }}
             onPointerDown={onFocus}
         >
-            <div
-                className='mac-titlebar relative flex items-center px-2 touch-none cursor-move'
-                onPointerDown={(event) => {
-                    onFocus()
-                    startDrag(event)
-                }}
-                onPointerMove={moveDrag}
-                onPointerUp={endDrag}
-                onPointerCancel={endDrag}
-            >
-                <button
-                    type='button'
-                    onClick={onClose}
-                    onPointerDown={(event) => event.stopPropagation()}
-                    className='mr-2 h-3 w-3 border-2 border-mac-ink bg-white p-0 appearance-none'
-                    aria-label={`${title} 닫기`}
-                />
-                <div className='mx-auto bg-mac-paper px-2 text-[11px] leading-[18px] tracking-wide'>{title}</div>
-            </div>
-            {subtitle ? (
-                <div className='flex items-center justify-between border-b border-mac-ink bg-mac-paper px-2 py-1 text-[11px]'>
-                    <span>{subtitle}</span>
+            <div className='flex h-full flex-col'>
+                <div
+                    className='mac-titlebar relative flex items-center px-2 touch-none cursor-move'
+                    onPointerDown={(event) => {
+                        onFocus()
+                        startDrag(event)
+                    }}
+                    onPointerMove={moveDrag}
+                    onPointerUp={endDrag}
+                    onPointerCancel={endDrag}
+                >
+                    <button
+                        type='button'
+                        onClick={onClose}
+                        onPointerDown={(event) => event.stopPropagation()}
+                        className='mr-2 h-3 w-3 border-2 border-mac-ink bg-white p-0 appearance-none'
+                        aria-label={`${title} 닫기`}
+                    />
+                    <div className='mx-auto bg-mac-paper px-2 text-[11px] leading-[18px] tracking-wide'>{title}</div>
                 </div>
-            ) : null}
-            <div className='relative h-[calc(100%-48px)] px-3 py-2'>
-                <div className='relative h-full w-full'>
-                    <div
-                        ref={scrollRef}
-                        className='mac-scroll h-full w-full overflow-auto border border-mac-ink bg-white p-2 pr-6'
-                    >
-                        {children}
+                {subtitle ? (
+                    <div className='border-b border-mac-ink bg-mac-paper px-2 py-1 text-[11px] leading-tight'>
+                        <span className='block whitespace-normal'>{subtitle}</span>
                     </div>
-                    <div
-                        className='mac-scroll-track pointer-events-none absolute right-2 top-2 w-3'
-                        style={{ height: `${scrollThumb.trackHeight}px` }}
-                    >
+                ) : null}
+                <div className='relative min-h-0 flex-1 px-3 py-2'>
+                    <div className='relative h-full w-full'>
                         <div
-                            className='mac-scroll-thumb pointer-events-auto'
-                            style={{
-                                height: `${scrollThumb.height}px`,
-                                transform: `translateY(${scrollThumb.top}px)`,
-                                opacity: scrollThumb.visible ? 1 : 0,
-                            }}
-                            onPointerDown={startThumbDrag}
-                            onPointerMove={moveThumbDrag}
-                            onPointerUp={endThumbDrag}
-                            onPointerCancel={endThumbDrag}
-                        />
+                            ref={scrollRef}
+                            className='mac-scroll h-full w-full overflow-auto border border-mac-ink bg-white p-2 pr-6'
+                        >
+                            {children}
+                        </div>
+                        <div
+                            className='mac-scroll-track pointer-events-none absolute right-2 top-2 w-3'
+                            style={{ height: `${scrollThumb.trackHeight}px` }}
+                        >
+                            <div
+                                className='mac-scroll-thumb pointer-events-auto'
+                                style={{
+                                    height: `${scrollThumb.height}px`,
+                                    transform: `translateY(${scrollThumb.top}px)`,
+                                    opacity: scrollThumb.visible ? 1 : 0,
+                                }}
+                                onPointerDown={startThumbDrag}
+                                onPointerMove={moveThumbDrag}
+                                onPointerUp={endThumbDrag}
+                                onPointerCancel={endThumbDrag}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
