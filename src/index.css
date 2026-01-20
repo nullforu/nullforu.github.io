@@ -44,8 +44,8 @@ a {
 .desktop-pattern {
     background-color: #d8d8d8;
     background-image:
-        repeating-linear-gradient(45deg, #cfcfcf 0 2px, #d8d8d8 2px 4px),
-        repeating-linear-gradient(-45deg, #d0d0d0 0 2px, #d8d8d8 2px 4px);
+        repeating-linear-gradient(45deg, #cfcfcf 0 6px, #d8d8d8 6px 12px),
+        repeating-linear-gradient(-45deg, #d0d0d0 0 6px, #d8d8d8 6px 12px);
 }
 
 .mac-titlebar {
