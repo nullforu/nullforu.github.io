@@ -1,4 +1,4 @@
-export type WindowId = 'system' | 'about' | 'curriculum' | 'projects' | 'join' | 'contact'
+export type WindowId = 'system' | 'about' | 'curriculum' | 'projects' | 'join' | 'contact' | 'bonobono'
 
 export type WindowDefinition = {
     id: WindowId

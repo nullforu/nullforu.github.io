@@ -43,6 +43,13 @@ export const WINDOW_DEFINITIONS: WindowDefinition[] = [
         size: { w: 360, h: 220 },
         defaultPos: { x: 640, y: 360 },
     },
+    {
+        id: 'bonobono',
+        title: '보노보노 바이러스',
+        subtitle: '아이고!',
+        size: { w: 300, h: 300 },
+        defaultPos: { x: 400, y: 400 },
+    },
 ]
 
 export const DESKTOP_ICONS: DesktopIconDefinition[] = [
@@ -51,4 +58,6 @@ export const DESKTOP_ICONS: DesktopIconDefinition[] = [
     { id: 'curriculum', label: '커리큘럼', icon: 'server' },
     { id: 'projects', label: '프로젝트', icon: 'folder' },
     { id: 'join', label: '모집 안내', icon: 'doc' },
+    { id: 'contact', label: '연락처', icon: 'chat' },
+    { id: 'bonobono', label: '보노보노 바이러스', icon: 'doc' },
 ]

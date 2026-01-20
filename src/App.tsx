@@ -5,6 +5,7 @@ import MenuBar from './components/MenuBar'
 import Window from './components/Window'
 import {
     AboutContent,
+    BonobonoContent,
     ContactContent,
     CurriculumContent,
     JoinContent,
@@ -164,6 +165,7 @@ function App() {
         projects: <ProjectsContent />,
         join: <JoinContent />,
         contact: <ContactContent />,
+        bonobono: <BonobonoContent />,
     }
 
     useEffect(() => {
