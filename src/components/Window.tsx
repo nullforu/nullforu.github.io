@@ -8,6 +8,7 @@ type WindowProps = {
     size: { w: number; h: number }
     minSize: { w: number; h: number }
     maxSize: { w: number; h: number }
+    scale: number
     open: boolean
     zIndex: number
     position: { x: number; y: number }
@@ -26,6 +27,7 @@ const Window = ({
     size,
     minSize,
     maxSize,
+    scale,
     open,
     zIndex,
     position,
@@ -173,7 +175,7 @@ const Window = ({
         if (!node || !scrollThumb.visible) return
         thumbDragRef.current = {
             pointerId: event.pointerId,
-            startY: event.clientY,
+            startY: event.clientY / scale,
             startScrollTop: node.scrollTop,
         }
         event.currentTarget.setPointerCapture(event.pointerId)
@@ -185,7 +187,7 @@ const Window = ({
         if (!drag || drag.pointerId !== event.pointerId || !node) return
         const maxScroll = node.scrollHeight - node.clientHeight
         const maxThumbTravel = Math.max(1, scrollThumb.trackHeight - scrollThumb.height)
-        const delta = event.clientY - drag.startY
+        const delta = event.clientY / scale - drag.startY
         const nextScroll = clamp(drag.startScrollTop + (delta / maxThumbTravel) * maxScroll, 0, maxScroll)
         node.scrollTop = nextScroll
     }
@@ -204,8 +206,8 @@ const Window = ({
         draggingRef.current = true
         dragRef.current = {
             pointerId: event.pointerId,
-            startX: event.clientX,
-            startY: event.clientY,
+            startX: event.clientX / scale,
+            startY: event.clientY / scale,
             originX: posRef.current.x,
             originY: posRef.current.y,
         }
@@ -220,8 +222,8 @@ const Window = ({
         if (!bounds || !node) return
         const maxX = Math.max(0, bounds.clientWidth - node.offsetWidth)
         const maxY = Math.max(0, bounds.clientHeight - node.offsetHeight)
-        const nextX = clamp(drag.originX + (event.clientX - drag.startX), 0, maxX)
-        const nextY = clamp(drag.originY + (event.clientY - drag.startY), 0, maxY)
+        const nextX = clamp(drag.originX + (event.clientX / scale - drag.startX), 0, maxX)
+        const nextY = clamp(drag.originY + (event.clientY / scale - drag.startY), 0, maxY)
         posRef.current = { x: nextX, y: nextY }
         node.style.transform = `translate3d(${nextX}px, ${nextY}px, 0)`
     }
@@ -240,8 +242,8 @@ const Window = ({
         resizingRef.current = true
         resizeDragRef.current = {
             pointerId: event.pointerId,
-            startX: event.clientX,
-            startY: event.clientY,
+            startX: event.clientX / scale,
+            startY: event.clientY / scale,
             originW: localSize.w,
             originH: localSize.h,
         }
@@ -252,8 +254,8 @@ const Window = ({
         const drag = resizeDragRef.current
         if (!drag || drag.pointerId !== event.pointerId) return
         const { maxW, maxH, minW, minH } = getSizeBounds()
-        const nextW = clamp(drag.originW + (event.clientX - drag.startX), minW, maxW)
-        const nextH = clamp(drag.originH + (event.clientY - drag.startY), minH, maxH)
+        const nextW = clamp(drag.originW + (event.clientX / scale - drag.startX), minW, maxW)
+        const nextH = clamp(drag.originH + (event.clientY / scale - drag.startY), minH, maxH)
         setLocalSize({ w: nextW, h: nextH })
     }
 
@@ -285,7 +287,7 @@ const Window = ({
             onPointerDown={onFocus}
         >
             <div
-                className='mac-titlebar relative flex items-center px-2 touch-none'
+                className='mac-titlebar relative flex items-center px-2 touch-none cursor-move'
                 onPointerDown={(event) => {
                     onFocus()
                     startDrag(event)

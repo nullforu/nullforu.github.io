@@ -230,6 +230,7 @@ function App() {
                                 size={state.size}
                                 minSize={def.size}
                                 maxSize={WINDOW_MAX_SIZE[def.id] ?? def.size}
+                                scale={scale}
                                 open={state.open}
                                 zIndex={state.z}
                                 position={state.pos}
