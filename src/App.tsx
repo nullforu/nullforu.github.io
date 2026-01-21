@@ -221,7 +221,12 @@ function App() {
             const next = { ...prev }
             WINDOW_DEFINITIONS.forEach((def) => {
                 if (!next[def.id].open) return
-                const position = compact ? getCenteredPos(def.id) : getDynamicPos(def.id, next)
+                const position =
+                    def.id === 'system'
+                        ? getCenteredPos(def.id)
+                        : compact
+                          ? getCenteredPos(def.id)
+                          : getDynamicPos(def.id, next)
                 if (position) {
                     next[def.id] = { ...next[def.id], pos: position }
                 }
