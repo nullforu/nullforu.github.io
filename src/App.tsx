@@ -11,9 +11,9 @@ import {
     JoinContent,
     ProjectsContent,
     SystemDiskContent,
-    WINDOW_MAX_SIZE,
-} from './components/WindowContents'
+} from './windows'
 import { DESKTOP_ICONS, WINDOW_DEFINITIONS } from './data/windows'
+import { WINDOW_MAX_SIZE } from './types/window'
 import type { WindowId, WindowState } from './types/window'
 
 function App() {

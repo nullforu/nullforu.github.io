@@ -22,3 +22,13 @@ export type DesktopIconDefinition = {
     label: string
     icon: IconName
 }
+
+export const WINDOW_MAX_SIZE: Record<WindowId, { w: number; h: number }> = {
+    system: { w: 720, h: 460 },
+    about: { w: 640, h: 420 },
+    curriculum: { w: 680, h: 440 },
+    projects: { w: 700, h: 440 },
+    join: { w: 580, h: 380 },
+    contact: { w: 520, h: 320 },
+    bonobono: { w: 500, h: 500 },
+}
