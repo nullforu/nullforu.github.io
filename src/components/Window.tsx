@@ -301,7 +301,7 @@ const Window = ({
                         type='button'
                         onClick={onClose}
                         onPointerDown={(event) => event.stopPropagation()}
-                        className='mr-2 h-3 w-3 border-2 border-mac-ink bg-white p-0 appearance-none'
+                        className='mr-2 h-3 w-3 border-2 border-mac-ink bg-white p-0 appearance-none hover:brightness-90'
                         aria-label={`${title} 닫기`}
                     />
                     <div className='mx-auto bg-mac-paper px-2 text-[11px] leading-[18px] tracking-wide'>{title}</div>

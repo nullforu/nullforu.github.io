@@ -5,6 +5,7 @@ import JoinContent from './Join'
 import ProjectsContent from './Projects'
 import ContactContent from './Contact'
 import BonobonoContent from './Bonobono'
+import AnonymousBoardContent from './AnonymousBoard'
 
 export {
     SystemDiskContent,
@@ -14,4 +15,5 @@ export {
     ProjectsContent,
     ContactContent,
     BonobonoContent,
+    AnonymousBoardContent,
 }

@@ -50,6 +50,13 @@ export const WINDOW_DEFINITIONS: WindowDefinition[] = [
         size: { w: 300, h: 300 },
         defaultPos: { x: 400, y: 400 },
     },
+    {
+        id: 'board',
+        title: '익명 게시판',
+        subtitle: '익명으로 글을 남기고 서로 소통해요.',
+        size: { w: 640, h: 420 },
+        defaultPos: { x: 200, y: 120 },
+    },
 ]
 
 export const DESKTOP_ICONS: DesktopIconDefinition[] = [
@@ -60,4 +67,5 @@ export const DESKTOP_ICONS: DesktopIconDefinition[] = [
     { id: 'join', label: '모집 안내', icon: 'doc' },
     { id: 'contact', label: '연락처', icon: 'chat' },
     { id: 'bonobono', label: '보노보노 바이러스', icon: 'doc' },
+    { id: 'board', label: '익명 게시판', icon: 'chat' },
 ]

@@ -5,6 +5,7 @@ import MenuBar from './components/MenuBar'
 import Window from './components/Window'
 import {
     AboutContent,
+    AnonymousBoardContent,
     BonobonoContent,
     ContactContent,
     CurriculumContent,
@@ -210,6 +211,7 @@ function App() {
         join: <JoinContent />,
         contact: <ContactContent />,
         bonobono: <BonobonoContent />,
+        board: <AnonymousBoardContent />,
     }
 
     useEffect(() => {

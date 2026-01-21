@@ -51,5 +51,13 @@ export default ({ onOpen }: { onOpen: (id: WindowId) => void }) => (
             <Icon name='doc' className='mx-auto h-12 w-12' />
             <div>보노보노 바이러스</div>
         </button>
+        <button
+            type='button'
+            onClick={() => onOpen('board')}
+            className='flex flex-col items-center gap-1 border-0 bg-transparent p-0 text-[inherit] font-[inherit] hover:opacity-80 appearance-none'
+        >
+            <Icon name='chat' className='mx-auto h-12 w-12' />
+            <div>익명 게시판</div>
+        </button>
     </div>
 )

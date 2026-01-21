@@ -1,4 +1,4 @@
-export type WindowId = 'system' | 'about' | 'curriculum' | 'projects' | 'join' | 'contact' | 'bonobono'
+export type WindowId = 'system' | 'about' | 'curriculum' | 'projects' | 'join' | 'contact' | 'bonobono' | 'board'
 
 export type WindowDefinition = {
     id: WindowId
@@ -31,4 +31,5 @@ export const WINDOW_MAX_SIZE: Record<WindowId, { w: number; h: number }> = {
     join: { w: 580, h: 380 },
     contact: { w: 520, h: 320 },
     bonobono: { w: 500, h: 500 },
+    board: { w: 820, h: 560 },
 }

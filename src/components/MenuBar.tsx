@@ -195,6 +195,16 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
                             >
                                 연락처
                             </button>
+                            <button
+                                type='button'
+                                className='mt-1 block w-full border-0 bg-transparent p-0 text-left text-[inherit] font-[inherit] hover:opacity-80 appearance-none'
+                                onClick={() => {
+                                    onOpenWindow('board')
+                                    closeMenu()
+                                }}
+                            >
+                                익명 게시판
+                            </button>
                         </div>
                     ) : null}
                 </div>
