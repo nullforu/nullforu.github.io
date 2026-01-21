@@ -23,7 +23,7 @@ type ViewMode = 'list' | 'create' | 'edit' | 'delete'
 
 const PAGE_LIMIT = 6
 
-const API_BASE_URL = (import.meta as ImportMeta & { env?: Record<string, string> }).env?.VITE_API_BASE_URL ?? ''
+const API_BASE_URL = 'https://4qg2ohp21j.execute-api.ap-northeast-2.amazonaws.com'
 
 const buildApiUrl = (path: string) => {
     const base = API_BASE_URL
