@@ -18,6 +18,7 @@ import type { WindowId, WindowState } from './types/window'
 
 function App() {
     const desktopRef = useRef<HTMLDivElement>(null)
+    const clickSoundRef = useRef<HTMLAudioElement | null>(null)
     const [compact, setCompact] = useState(false)
     const [viewport, setViewport] = useState({ w: 0, h: 0 })
     const scale = compact ? 1 : 1.5
@@ -31,6 +32,25 @@ function App() {
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        clickSoundRef.current = new Audio('/sounds/click.mp3')
+        clickSoundRef.current.preload = 'auto'
+        const handleClickSound = (event: PointerEvent) => {
+            const target = event.target as HTMLElement | null
+            if (!target) return
+            const clickable = target.closest('button, [role="button"], a')
+            if (!clickable) return
+            const audio = clickSoundRef.current
+            if (!audio) return
+            audio.currentTime = 0
+            void audio.play().catch(() => undefined)
+        }
+        document.addEventListener('pointerdown', handleClickSound, true)
+        return () => {
+            document.removeEventListener('pointerdown', handleClickSound, true)
+        }
     }, [])
 
     useEffect(() => {
