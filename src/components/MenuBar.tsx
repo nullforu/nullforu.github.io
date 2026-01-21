@@ -12,6 +12,7 @@ type MenuBarProps = {
 
 const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarProps) => {
     const [openMenu, setOpenMenu] = useState<MenuId | null>(null)
+    const [menuLeft, setMenuLeft] = useState(8)
     const menuRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -27,6 +28,15 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
     }, [openMenu])
 
     const closeMenu = () => setOpenMenu(null)
+    const openDesktopMenu = (id: MenuId, target: HTMLElement) => {
+        const container = menuRef.current
+        if (!container) {
+            setOpenMenu((prev) => (prev === id ? null : id))
+            return
+        }
+        setMenuLeft(target.offsetLeft)
+        setOpenMenu((prev) => (prev === id ? null : id))
+    }
 
     return (
         <div
@@ -48,28 +58,28 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
                         <button
                             type='button'
                             className='border-0 bg-transparent p-0 text-[inherit] font-[inherit] appearance-none hover:opacity-80'
-                            onClick={() => setOpenMenu((prev) => (prev === 'file' ? null : 'file'))}
+                            onClick={(event) => openDesktopMenu('file', event.currentTarget)}
                         >
                             File
                         </button>
                         <button
                             type='button'
                             className='border-0 bg-transparent p-0 text-[inherit] font-[inherit] appearance-none hover:opacity-80'
-                            onClick={() => setOpenMenu((prev) => (prev === 'edit' ? null : 'edit'))}
+                            onClick={(event) => openDesktopMenu('edit', event.currentTarget)}
                         >
                             Edit
                         </button>
                         <button
                             type='button'
                             className='border-0 bg-transparent p-0 text-[inherit] font-[inherit] appearance-none hover:opacity-80'
-                            onClick={() => setOpenMenu((prev) => (prev === 'view' ? null : 'view'))}
+                            onClick={(event) => openDesktopMenu('view', event.currentTarget)}
                         >
                             View
                         </button>
                         <button
                             type='button'
                             className='border-0 bg-transparent p-0 text-[inherit] font-[inherit] appearance-none hover:opacity-80'
-                            onClick={() => setOpenMenu((prev) => (prev === 'special' ? null : 'special'))}
+                            onClick={(event) => openDesktopMenu('special', event.currentTarget)}
                         >
                             Special
                         </button>
@@ -78,7 +88,10 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
             </div>
             <div className='hidden text-[11px] sm:block'>세명컴퓨터고등학교 Null4U</div>
             {openMenu ? (
-                <div className='absolute left-2 top-8 z-50 w-48 border-2 border-mac-ink bg-mac-paper text-[11px] shadow-[2px_2px_0_#111111]'>
+                <div
+                    className='absolute top-8 z-50 w-48 border-2 border-mac-ink bg-mac-paper text-[11px] shadow-[2px_2px_0_#111111]'
+                    style={{ left: compact ? 8 : menuLeft }}
+                >
                     {openMenu === 'menu' || openMenu === 'file' ? (
                         <div className='border-b border-mac-ink p-2'>
                             <div className='mb-1 text-[10px]'>File</div>
