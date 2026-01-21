@@ -21,6 +21,7 @@ function App() {
     const [compact, setCompact] = useState(false)
     const [viewport, setViewport] = useState({ w: 0, h: 0 })
     const scale = compact ? 1 : 1.5
+    const didInitialLayout = useRef(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -109,29 +110,52 @@ function App() {
         return { x: nextX, y: nextY }
     }
 
+    const getDynamicPos = (id: WindowId, state: Record<WindowId, WindowState>) => {
+        const bounds = desktopRef.current
+        const def = WINDOW_DEFINITIONS.find((item) => item.id === id)
+        if (!bounds || !def) return state[id].pos
+        const size = state[id].size
+        const maxX = Math.max(0, bounds.clientWidth - size.w - 8)
+        const maxY = Math.max(0, bounds.clientHeight * 0.8 - size.h - 8)
+        const minX = 24
+        const minY = 40
+        const x = minX + Math.random() * Math.max(0, maxX - minX)
+        const y = minY + Math.random() * Math.max(0, maxY - minY)
+        return { x, y }
+    }
+
     const openWindow = (id: WindowId) => {
-        if (!compact) {
-            bringToFront(id)
-            return
-        }
-        const centered = getCenteredPos(id)
         setWindowState((prev) => {
+            if (prev[id].open) {
+                const maxZ = Math.max(...Object.values(prev).map((state) => state.z))
+                return {
+                    ...prev,
+                    [id]: {
+                        ...prev[id],
+                        open: true,
+                        z: maxZ + 1,
+                    },
+                }
+            }
+            const position = compact ? getCenteredPos(id) : getDynamicPos(id, prev)
             const maxZ = Math.max(...Object.values(prev).map((state) => state.z))
             const nextState = { ...prev }
-            Object.keys(nextState).forEach((key) => {
-                const windowId = key as WindowId
-                nextState[windowId] = {
-                    ...nextState[windowId],
-                    open: windowId === id,
-                }
-            })
+            if (compact) {
+                Object.keys(nextState).forEach((key) => {
+                    const windowId = key as WindowId
+                    nextState[windowId] = {
+                        ...nextState[windowId],
+                        open: windowId === id,
+                    }
+                })
+            }
             return {
                 ...nextState,
                 [id]: {
                     ...nextState[id],
                     open: true,
                     z: maxZ + 1,
-                    pos: centered ?? prev[id].pos,
+                    pos: position ?? prev[id].pos,
                 },
             }
         })
@@ -188,6 +212,24 @@ function App() {
             return next
         })
     }, [compact])
+
+    useEffect(() => {
+        if (didInitialLayout.current) return
+        const bounds = desktopRef.current
+        if (!bounds) return
+        setWindowState((prev) => {
+            const next = { ...prev }
+            WINDOW_DEFINITIONS.forEach((def) => {
+                if (!next[def.id].open) return
+                const position = compact ? getCenteredPos(def.id) : getDynamicPos(def.id, next)
+                if (position) {
+                    next[def.id] = { ...next[def.id], pos: position }
+                }
+            })
+            return next
+        })
+        didInitialLayout.current = true
+    }, [compact, viewport.h, viewport.w])
 
     useEffect(() => {
         if (!viewport.w || !viewport.h) return
