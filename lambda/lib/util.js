@@ -25,8 +25,7 @@ function makeId() {
 
 function validateAnonPassword(password) {
     if (!password) return { ok: false, message: 'password is required' }
-    if (password.length < 6) return { ok: false, message: 'password too short (min 6)' }
-    if (password.length > 64) return { ok: false, message: 'password too long (max 64)' }
+    if (password.length > 32) return { ok: false, message: 'password too long (max 32)' }
     return { ok: true, password }
 }
 
