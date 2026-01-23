@@ -22,6 +22,11 @@ function App() {
     const clickSoundRef = useRef<HTMLAudioElement | null>(null)
     const [compact, setCompact] = useState(false)
     const [viewport, setViewport] = useState({ w: 0, h: 0 })
+    const [soundEnabled, setSoundEnabled] = useState(() => {
+        const saved = localStorage.getItem('soundEnabled')
+        const isMobile = window.innerWidth < 768
+        return saved !== null ? saved === 'true' : !isMobile
+    })
     const scale = compact ? 1 : 1.5
     const didInitialLayout = useRef(false)
 
@@ -39,6 +44,7 @@ function App() {
         clickSoundRef.current = new Audio('/sounds/click.mp3')
         clickSoundRef.current.preload = 'auto'
         const handleClickSound = (event: PointerEvent) => {
+            if (!soundEnabled) return
             const target = event.target as HTMLElement | null
             if (!target) return
             const clickable = target.closest('button, [role="button"], a')
@@ -52,7 +58,11 @@ function App() {
         return () => {
             document.removeEventListener('pointerdown', handleClickSound, true)
         }
-    }, [])
+    }, [soundEnabled])
+
+    useEffect(() => {
+        localStorage.setItem('soundEnabled', String(soundEnabled))
+    }, [soundEnabled])
 
     useEffect(() => {
         const applyTabIndex = () => {
@@ -296,9 +306,11 @@ function App() {
             >
                 <MenuBar
                     compact={compact}
+                    soundEnabled={soundEnabled}
                     onOpenWindow={openWindow}
                     onCloseAll={closeAllWindows}
                     onResetWindows={resetWindows}
+                    onToggleSound={() => setSoundEnabled((prev) => !prev)}
                 />
                 <div ref={desktopRef} className='desktop-pattern relative' style={{ height: 'calc(100% - 32px)' }}>
                     <div className='absolute inset-0 pl-6 pt-8 overflow-hidden pointer-events-none'>

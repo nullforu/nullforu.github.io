@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import type { WindowId } from '../types/window'
 
-type MenuId = 'file' | 'edit' | 'view' | 'special' | 'menu'
+type MenuId = 'file' | 'edit' | 'view' | 'options' | 'menu'
 
 type MenuBarProps = {
     compact: boolean
+    soundEnabled: boolean
     onOpenWindow: (id: WindowId) => void
     onCloseAll: () => void
     onResetWindows: () => void
+    onToggleSound: () => void
 }
 
-const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarProps) => {
+const MenuBar = ({ compact, soundEnabled, onOpenWindow, onCloseAll, onResetWindows, onToggleSound }: MenuBarProps) => {
     const [openMenu, setOpenMenu] = useState<MenuId | null>(null)
     const [menuLeft, setMenuLeft] = useState(8)
     const menuRef = useRef<HTMLDivElement>(null)
@@ -79,9 +81,9 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
                         <button
                             type='button'
                             className='border-0 bg-transparent p-0 text-[inherit] font-[inherit] appearance-none hover:opacity-80'
-                            onClick={(event) => openDesktopMenu('special', event.currentTarget)}
+                            onClick={(event) => openDesktopMenu('options', event.currentTarget)}
                         >
-                            Special
+                            Options
                         </button>
                     </>
                 )}
@@ -138,12 +140,6 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
                     {openMenu === 'menu' || openMenu === 'view' ? (
                         <div className='border-b border-mac-ink p-2'>
                             <div className='mb-1 text-[10px]'>View</div>
-                            <div className='border-t border-mac-ink my-1' />
-                        </div>
-                    ) : null}
-                    {openMenu === 'menu' || openMenu === 'special' ? (
-                        <div className='p-2'>
-                            <div className='mb-1 text-[10px]'>Special</div>
                             <div className='border-t border-mac-ink my-1' />
                             <button
                                 type='button'
@@ -205,6 +201,23 @@ const MenuBar = ({ compact, onOpenWindow, onCloseAll, onResetWindows }: MenuBarP
                             >
                                 익명 게시판
                             </button>
+                        </div>
+                    ) : null}
+                    {openMenu === 'menu' || openMenu === 'options' ? (
+                        <div className='p-2'>
+                            <div className='mb-1 text-[10px]'>Options</div>
+                            <div className='border-t border-mac-ink my-1' />
+                            <label className='flex items-center gap-2 cursor-pointer hover:opacity-80'>
+                                <input
+                                    type='checkbox'
+                                    checked={soundEnabled}
+                                    onChange={onToggleSound}
+                                    className='appearance-none w-4 h-4 border-2 border-mac-ink bg-white cursor-pointer checked:bg-mac-ink relative flex-shrink-0
+                                    after:content-[""] after:absolute after:left-[3px] after:top-[-1px] after:w-[6px] after:h-[10px] 
+                                    after:border-white after:border-r-2 after:border-b-2 after:rotate-45 after:opacity-0 checked:after:opacity-100'
+                                />
+                                <span>효과음</span>
+                            </label>
                         </div>
                     ) : null}
                 </div>
