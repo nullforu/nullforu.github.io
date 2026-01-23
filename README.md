@@ -75,3 +75,9 @@ Attach an IAM policy to the role that allows S3 sync (policy name: `GitHubAction
     ]
 }
 ```
+
+# Contributors
+
+- 김준영, [@yulmwu](https://github.com/yulmwu) - Maintainer
+- 경대영, [rudeodud](https://github.com/rudeodud) - Bug reports and suggestions
+- and more [Null4U](https://github.com/nullforu) members...
