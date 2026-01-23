@@ -21,8 +21,8 @@ export const WINDOW_DEFINITIONS: WindowDefinition[] = [
         id: 'about',
         title: 'Null4U 소개',
         subtitle: 'DevOps/Cloud 전공동아리 Null4U를 소개합니다.',
-        size: { w: 760, h: 450 },
-        maxSize: { w: 820, h: 560 },
+        size: { w: 820, h: 560 },
+        maxSize: { w: 920, h: 600 },
         centerOnOpen: true,
     },
     {

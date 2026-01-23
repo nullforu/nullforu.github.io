@@ -8,8 +8,7 @@ type ReadableTextProps = {
 export default function ReadableText({ children }: ReadableTextProps) {
     const [useReadableFont, setUseReadableFont] = useState(() => {
         const stored = localStorage.getItem('useReadableFont')
-        if (!stored) localStorage.setItem('useReadableFont', 'true')
-        return stored === 'true'
+        return stored !== null ? stored === 'true' : true
     })
 
     useEffect(() => {

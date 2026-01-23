@@ -5,8 +5,15 @@ export default ({ onOpen }: { onOpen: (id: WindowId) => void }) => (
     <div className='text-center break-keep'>
         <h1 className='mb-4 text-lg font-bold'>안녕하세요, Null4U가 처음이신가요?</h1>
         <p className='mb-4'>아래의 항목을 통해 Null4U에 대해 알아보실 수 있습니다.</p>
-        <p className='mb-4'>
+        <p className='mb-4 mx-10'>
             사이트 이용에 도움이 필요하시면 아래의 <span className='bg-yellow-200'>도움말</span>을 참고해보세요!
+        </p>
+        <p className='mb-1 mx-10'>
+            <span className='bg-yellow-200'>동아리 소개</span>에서 저희 동아리에 대한 정보를 확인해보실 수
+            있으며,
+        </p>
+        <p className='mb-4 mx-10'>
+            궁금한 점이 있다면 언제든지 <span className='bg-yellow-200'>연락처</span>를 통해 문의해주세요!
         </p>
         <div className='mt-6 grid text-[11px] grid-cols-3 gap-3 sm:grid-cols-4'>
             <button

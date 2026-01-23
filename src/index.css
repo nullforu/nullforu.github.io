@@ -22,8 +22,9 @@
 
 @font-face {
     font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
-    font-weight: 400;
+    src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2')
+        format('woff2-variations');
+    font-weight: 45 920;
     font-style: normal;
     font-display: swap;
 }
@@ -32,7 +33,7 @@
     color-scheme: light;
     background-color: #d8d8d8;
     color: #111111;
-    font-family: 'ChicagoFLF', 'DungGeunMo', 'Geneva', 'Lucida Console', monospace;
+    font-family: 'ChicagoFLF', 'DungGeunMo', 'Pretendard', 'Geneva', 'Lucida Console', monospace;
 }
 
 html,
@@ -127,6 +128,7 @@ a {
 
 .font-pretendard {
     font-family: 'Pretendard', sans-serif;
+    font-weight: 300;
 }
 
 .menu-checkbox {
