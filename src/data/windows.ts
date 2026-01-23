@@ -1,31 +1,27 @@
 import type { DesktopIconDefinition, WindowDefinition } from '../types/window'
 
-// export const WINDOW_MAX_SIZE: Record<WindowId, { w: number; h: number }> = {
-//     system: { w: 720, h: 460 },
-//     about: { w: 820, h: 560 },
-//     curriculum: { w: 680, h: 440 },
-//     projects: { w: 700, h: 440 },
-//     join: { w: 580, h: 380 },
-//     contact: { w: 520, h: 320 },
-//     bonobono: { w: 500, h: 500 },
-//     board: { w: 820, h: 560 },
-//     terminal: { w: 720, h: 480 },
-// }
-
 export const WINDOW_DEFINITIONS: WindowDefinition[] = [
     {
         id: 'system',
         title: 'System Disk',
         subtitle: 'Copyright (C) 2026 Null4U. All rights reserved.',
-        size: { w: 520, h: 300 },
+        size: { w: 700, h: 400 },
         maxSize: { w: 720, h: 460 },
+        centerOnOpen: true,
+    },
+    {
+        id: 'help',
+        title: '도움말',
+        subtitle: 'Null4U 홈페이지 이용에 도움이 필요하신가요?',
+        size: { w: 500, h: 300 },
+        maxSize: { w: 700, h: 440 },
         centerOnOpen: true,
     },
     {
         id: 'about',
         title: 'Null4U 소개',
         subtitle: 'DevOps/Cloud 전공동아리 Null4U를 소개합니다.',
-        size: { w: 760, h: 400 },
+        size: { w: 760, h: 450 },
         maxSize: { w: 820, h: 560 },
         centerOnOpen: true,
     },
@@ -88,4 +84,5 @@ export const DESKTOP_ICONS: DesktopIconDefinition[] = [
     { id: 'join', label: '모집 안내', icon: 'doc' },
     { id: 'contact', label: '연락처', icon: 'chat' },
     { id: 'board', label: '익명 게시판', icon: 'chat' },
+    { id: 'help', label: '도움말', icon: 'help' },
 ]

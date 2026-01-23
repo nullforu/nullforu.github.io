@@ -288,7 +288,7 @@ const Window = ({
         >
             <div className='flex h-full flex-col'>
                 <div
-                    className='mac-titlebar relative flex items-center px-2 touch-none cursor-move'
+                    className='mac-titlebar relative flex items-center px-2 pr-7 touch-none cursor-move'
                     onPointerDown={(event) => {
                         onFocus()
                         startDrag(event)
@@ -311,7 +311,7 @@ const Window = ({
                         <span className='block whitespace-normal'>{subtitle}</span>
                     </div>
                 ) : null}
-                <div className='relative min-h-0 flex-1 px-3 py-2'>
+                <div className='relative min-h-0 flex-1 px-1.5 py-3'>
                     <div className='relative h-full w-full'>
                         <div
                             ref={scrollRef}

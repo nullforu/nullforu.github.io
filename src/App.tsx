@@ -9,6 +9,7 @@ import {
     BonobonoContent,
     ContactContent,
     CurriculumContent,
+    HelpContent,
     JoinContent,
     ProjectsContent,
     SystemDiskContent,
@@ -218,6 +219,7 @@ function App() {
 
     const windowContent: Record<WindowId, ReactNode> = {
         system: <SystemDiskContent onOpen={(id) => openWindow(id)} />,
+        help: <HelpContent />,
         about: <AboutContent />,
         curriculum: <CurriculumContent />,
         projects: <ProjectsContent />,

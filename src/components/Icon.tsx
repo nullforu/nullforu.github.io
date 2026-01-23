@@ -49,6 +49,20 @@ const Icon = ({ name, className }: { name: IconName; className?: string }) => {
                     <line x1='32' y1='44' x2='48' y2='44' stroke='#111111' strokeWidth='3' />
                 </svg>
             )
+        case 'help':
+            return (
+                <svg viewBox='0 0 64 64' className={className} aria-hidden='true'>
+                    <circle cx='32' cy='32' r='24' fill='#ffffff' stroke='#111111' strokeWidth='3' />
+                    <path
+                        d='M24 26c0-4.4 3.6-8 8-8s8 3.6 8 8c0 3.2-1.8 5.4-4.4 6.8-2.2 1.2-3.6 2.4-3.6 5.2'
+                        fill='none'
+                        stroke='#111111'
+                        strokeWidth='3'
+                        strokeLinecap='round'
+                    />
+                    <circle cx='32' cy='44' r='2.5' fill='#111111' />
+                </svg>
+            )
         case 'folder':
         default:
             return (

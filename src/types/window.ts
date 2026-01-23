@@ -1,5 +1,6 @@
 export type WindowId =
     | 'system'
+    | 'help'
     | 'about'
     | 'curriculum'
     | 'projects'
@@ -30,7 +31,7 @@ export type WindowState = {
     size: WindowSize
 }
 
-export type IconName = 'folder' | 'disk' | 'doc' | 'server' | 'chat' | 'terminal'
+export type IconName = 'folder' | 'disk' | 'doc' | 'server' | 'chat' | 'terminal' | 'help'
 
 export type DesktopIconDefinition = {
     id: WindowId
