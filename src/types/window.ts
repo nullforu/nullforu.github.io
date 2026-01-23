@@ -1,4 +1,13 @@
-export type WindowId = 'system' | 'about' | 'curriculum' | 'projects' | 'join' | 'contact' | 'bonobono' | 'board'
+export type WindowId =
+    | 'system'
+    | 'about'
+    | 'curriculum'
+    | 'projects'
+    | 'join'
+    | 'contact'
+    | 'bonobono'
+    | 'board'
+    | 'terminal'
 
 export type WindowDefinition = {
     id: WindowId
@@ -15,7 +24,7 @@ export type WindowState = {
     size: { w: number; h: number }
 }
 
-export type IconName = 'folder' | 'disk' | 'doc' | 'server' | 'chat'
+export type IconName = 'folder' | 'disk' | 'doc' | 'server' | 'chat' | 'terminal'
 
 export type DesktopIconDefinition = {
     id: WindowId
@@ -32,4 +41,5 @@ export const WINDOW_MAX_SIZE: Record<WindowId, { w: number; h: number }> = {
     contact: { w: 520, h: 320 },
     bonobono: { w: 500, h: 500 },
     board: { w: 820, h: 560 },
+    terminal: { w: 720, h: 480 },
 }

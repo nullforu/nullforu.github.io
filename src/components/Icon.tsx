@@ -41,6 +41,14 @@ const Icon = ({ name, className }: { name: IconName; className?: string }) => {
                     <circle cx='40' cy='26' r='2' fill='#111111' />
                 </svg>
             )
+        case 'terminal':
+            return (
+                <svg viewBox='0 0 64 64' className={className} aria-hidden='true'>
+                    <rect x='8' y='12' width='48' height='40' fill='#ffffff' stroke='#111111' strokeWidth='3' />
+                    <polyline points='16,20 28,32 16,44' fill='none' stroke='#111111' strokeWidth='3' />
+                    <line x1='32' y1='44' x2='48' y2='44' stroke='#111111' strokeWidth='3' />
+                </svg>
+            )
         case 'folder':
         default:
             return (

@@ -57,6 +57,13 @@ export const WINDOW_DEFINITIONS: WindowDefinition[] = [
         size: { w: 640, h: 420 },
         defaultPos: { x: 200, y: 120 },
     },
+    {
+        id: 'terminal',
+        title: 'Terminal',
+        subtitle: 'null4u@devops-terminal',
+        size: { w: 580, h: 360 },
+        defaultPos: { x: 280, y: 160 },
+    },
 ]
 
 export const DESKTOP_ICONS: DesktopIconDefinition[] = [
@@ -66,6 +73,5 @@ export const DESKTOP_ICONS: DesktopIconDefinition[] = [
     { id: 'projects', label: '프로젝트', icon: 'folder' },
     { id: 'join', label: '모집 안내', icon: 'doc' },
     { id: 'contact', label: '연락처', icon: 'chat' },
-    { id: 'bonobono', label: '보노보노 바이러스', icon: 'doc' },
     { id: 'board', label: '익명 게시판', icon: 'chat' },
 ]

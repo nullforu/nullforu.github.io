@@ -6,6 +6,7 @@ import ProjectsContent from './Projects'
 import ContactContent from './Contact'
 import BonobonoContent from './Bonobono'
 import AnonymousBoardContent from './AnonymousBoard'
+import TerminalContent from './Terminal'
 
 export {
     SystemDiskContent,
@@ -16,4 +17,5 @@ export {
     ContactContent,
     BonobonoContent,
     AnonymousBoardContent,
+    TerminalContent,
 }

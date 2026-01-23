@@ -12,6 +12,7 @@ import {
     JoinContent,
     ProjectsContent,
     SystemDiskContent,
+    TerminalContent,
 } from './windows'
 import { DESKTOP_ICONS, WINDOW_DEFINITIONS } from './data/windows'
 import { WINDOW_MAX_SIZE } from './types/window'
@@ -222,6 +223,7 @@ function App() {
         contact: <ContactContent />,
         bonobono: <BonobonoContent />,
         board: <AnonymousBoardContent />,
+        terminal: <TerminalContent />,
     }
 
     useEffect(() => {
