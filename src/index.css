@@ -20,6 +20,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     color-scheme: light;
     background-color: #d8d8d8;
@@ -115,4 +123,40 @@ a {
 
 .pixel {
     image-rendering: pixelated;
+}
+
+.font-pretendard {
+    font-family: 'Pretendard', sans-serif;
+}
+
+.menu-checkbox {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #111111;
+    background-color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.menu-checkbox:checked {
+    background-color: #111111;
+}
+
+.menu-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    width: 6px;
+    height: 10px;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.menu-checkbox:checked::after {
+    opacity: 1;
 }

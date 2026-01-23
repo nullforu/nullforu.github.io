@@ -15,7 +15,6 @@ import {
     TerminalContent,
 } from './windows'
 import { DESKTOP_ICONS, WINDOW_DEFINITIONS } from './data/windows'
-import { WINDOW_MAX_SIZE } from './types/window'
 import type { WindowId, WindowState } from './types/window'
 
 function App() {
@@ -83,7 +82,7 @@ function App() {
                 acc[def.id] = {
                     open: def.id === 'system',
                     z: 10 + index,
-                    pos: def.defaultPos,
+                    pos: { x: 0, y: 0 },
                     size: def.size,
                 }
                 return acc
@@ -121,9 +120,10 @@ function App() {
         setWindowState((prev) => {
             const next = { ...prev }
             WINDOW_DEFINITIONS.forEach((def) => {
+                const pos = def.centerOnOpen ? (getCenteredPos(def.id) ?? { x: 0, y: 0 }) : getDynamicPos(def.id, next)
                 next[def.id] = {
                     ...next[def.id],
-                    pos: def.defaultPos,
+                    pos,
                     size: def.size,
                 }
             })
@@ -136,7 +136,7 @@ function App() {
         const def = WINDOW_DEFINITIONS.find((item) => item.id === id)
         if (!bounds || !def) return null
         const maxWidth = Math.min(bounds.clientWidth * 0.92, def.size.w)
-        const maxHeight = Math.min(bounds.clientHeight * 0.72, def.size.h)
+        const maxHeight = Math.min(bounds.clientHeight * 0.92, def.size.h)
         const nextX = Math.max(0, (bounds.clientWidth - maxWidth) / 2)
         const nextY = Math.max(0, (bounds.clientHeight - maxHeight) / 2)
         return { x: nextX, y: nextY }
@@ -169,7 +169,9 @@ function App() {
                     },
                 }
             }
-            const position = compact ? getCenteredPos(id) : getDynamicPos(id, prev)
+            const def = WINDOW_DEFINITIONS.find((d) => d.id === id)
+            const shouldCenter = def?.centerOnOpen ?? compact
+            const position = shouldCenter ? getCenteredPos(id) : getDynamicPos(id, prev)
             const maxZ = Math.max(...Object.values(prev).map((state) => state.z))
             const nextState = { ...prev }
             if (compact) {
@@ -255,12 +257,8 @@ function App() {
             const next = { ...prev }
             WINDOW_DEFINITIONS.forEach((def) => {
                 if (!next[def.id].open) return
-                const position =
-                    def.id === 'system'
-                        ? getCenteredPos(def.id)
-                        : compact
-                          ? getCenteredPos(def.id)
-                          : getDynamicPos(def.id, next)
+                const shouldCenter = def.centerOnOpen ?? compact
+                const position = shouldCenter ? getCenteredPos(def.id) : getDynamicPos(def.id, next)
                 if (position) {
                     next[def.id] = { ...next[def.id], pos: position }
                 }
@@ -277,7 +275,7 @@ function App() {
         setWindowState((prev) => {
             const next = { ...prev }
             WINDOW_DEFINITIONS.forEach((def) => {
-                const maxSize = WINDOW_MAX_SIZE[def.id] ?? def.size
+                const maxSize = def.maxSize ?? def.size
                 const boundMaxW = Math.max(220, bounds.clientWidth - 8)
                 const boundMaxH = Math.max(180, bounds.clientHeight - 8)
                 const maxW = Math.min(maxSize.w, boundMaxW)
@@ -343,7 +341,7 @@ function App() {
                                 subtitle={def.subtitle}
                                 size={state.size}
                                 minSize={def.size}
-                                maxSize={WINDOW_MAX_SIZE[def.id] ?? def.size}
+                                maxSize={def.maxSize ?? def.size}
                                 scale={scale}
                                 open={state.open}
                                 zIndex={state.z}

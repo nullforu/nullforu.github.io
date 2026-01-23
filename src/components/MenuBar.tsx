@@ -212,9 +212,7 @@ const MenuBar = ({ compact, soundEnabled, onOpenWindow, onCloseAll, onResetWindo
                                     type='checkbox'
                                     checked={soundEnabled}
                                     onChange={onToggleSound}
-                                    className='appearance-none w-4 h-4 border-2 border-mac-ink bg-white cursor-pointer checked:bg-mac-ink relative flex-shrink-0
-                                    after:content-[""] after:absolute after:left-[3px] after:top-[-1px] after:w-[6px] after:h-[10px] 
-                                    after:border-white after:border-r-2 after:border-b-2 after:rotate-45 after:opacity-0 checked:after:opacity-100'
+                                    className='menu-checkbox'
                                 />
                                 <span>효과음</span>
                             </label>

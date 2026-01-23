@@ -4,7 +4,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                chicago: ['"ChicagoFLF"', '"DungGeunMo"', '"Geneva"', '"Lucida Console"', 'monospace'],
+                chicago: ['"ChicagoFLF"', '"DungGeunMo"', '"Pretendard"', '"Geneva"', '"Lucida Console"', 'monospace'],
             },
             colors: {
                 mac: {
