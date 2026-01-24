@@ -1,8 +1,8 @@
 # Null4U
 
-<div style="display: flex; gap: 10px; text-align: center;">
-  <img src="assets/preview_2.png" width="45%" />
-  <img src="assets/preview_1.png" width="45%" />
+<div align="center">
+  <img src="assets/preview_1.png" width="48%" />
+  <img src="assets/preview_2.png" width="48%" />
 </div>
 
 # Tech Stack (Frontend)
