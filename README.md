@@ -76,6 +76,21 @@ Attach an IAM policy to the role that allows S3 sync (policy name: `GitHubAction
 }
 ```
 
+and cloudfront invalidation if needed. (policy name: `GitHubActionsCloudFrontInvalidation`):
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": ["cloudfront:CreateInvalidation"],
+            "Resource": "arn:aws:cloudfront::<ACCOUNT_ID>:distribution/<DISTRIBUTION_ID>"
+        }
+    ]
+}
+```
+
 # Contributors
 
 - 김준영, [@yulmwu](https://github.com/yulmwu) - Maintainer
