@@ -92,6 +92,17 @@ and cloudfront invalidation if needed. (policy name: `GitHubActionsCloudFrontInv
 }
 ```
 
+# Github Actions Workflows
+
+```shell
+gh workflow run "Deploy static site to S3" # --ref main
+
+gh workflow run "Invalidate CloudFront cache"
+# or 
+gh workflow run "Invalidate CloudFront cache" \
+  -f paths="/index.html /assets/*"
+```
+
 # Contributors
 
 - 김준영, [@yulmwu](https://github.com/yulmwu) - Maintainer
