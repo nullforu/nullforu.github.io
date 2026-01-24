@@ -84,7 +84,7 @@ function App() {
                     open: def.id === 'system',
                     z: 10 + index,
                     pos: { x: 0, y: 0 },
-                    size: def.size,
+                    size: def.defaultSize,
                 }
                 return acc
             },
@@ -125,7 +125,7 @@ function App() {
                 next[def.id] = {
                     ...next[def.id],
                     pos,
-                    size: def.size,
+                    size: def.defaultSize,
                 }
             })
             return next
@@ -136,8 +136,8 @@ function App() {
         const bounds = desktopRef.current
         const def = WINDOW_DEFINITIONS.find((item) => item.id === id)
         if (!bounds || !def) return null
-        const maxWidth = Math.min(bounds.clientWidth * 0.92, def.size.w)
-        const maxHeight = Math.min(bounds.clientHeight * 0.92, def.size.h)
+        const maxWidth = Math.min(bounds.clientWidth * 0.92, def.defaultSize.w)
+        const maxHeight = Math.min(bounds.clientHeight * 0.92, def.defaultSize.h)
         const nextX = Math.max(0, (bounds.clientWidth - maxWidth) / 2)
         const nextY = Math.max(0, (bounds.clientHeight - maxHeight) / 2)
         return { x: nextX, y: nextY }
@@ -280,13 +280,14 @@ function App() {
         setWindowState((prev) => {
             const next = { ...prev }
             WINDOW_DEFINITIONS.forEach((def) => {
-                const maxSize = def.maxSize ?? def.size
+                const minSize = def.minSize ?? def.defaultSize
+                const maxSize = def.maxSize ?? def.defaultSize
                 const boundMaxW = Math.max(220, bounds.clientWidth - 8)
                 const boundMaxH = Math.max(180, bounds.clientHeight - 8)
                 const maxW = Math.min(maxSize.w, boundMaxW)
                 const maxH = Math.min(maxSize.h, boundMaxH)
-                const minW = Math.min(def.size.w, maxW)
-                const minH = Math.min(def.size.h, maxH)
+                const minW = Math.min(minSize.w, maxW)
+                const minH = Math.min(minSize.h, maxH)
                 next[def.id] = {
                     ...next[def.id],
                     size: {
@@ -345,8 +346,8 @@ function App() {
                                 title={def.title}
                                 subtitle={def.subtitle}
                                 size={state.size}
-                                minSize={def.size}
-                                maxSize={def.maxSize ?? def.size}
+                                minSize={def.minSize ?? def.defaultSize}
+                                maxSize={def.maxSize ?? def.defaultSize}
                                 scale={scale}
                                 open={state.open}
                                 zIndex={state.z}

@@ -19,7 +19,8 @@ export type WindowDefinition = {
     id: WindowId
     title: string
     subtitle?: string
-    size: WindowSize
+    defaultSize: WindowSize
+    minSize?: WindowSize
     maxSize?: WindowSize
     centerOnOpen?: boolean
 }
