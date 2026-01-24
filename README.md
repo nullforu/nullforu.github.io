@@ -1,6 +1,9 @@
 # Null4U
 
-![preview](assets/preview.png)
+<div style="display: flex; gap: 10px; text-align: center;">
+  <img src="assets/preview_2.png" width="45%" />
+  <img src="assets/preview_1.png" width="45%" />
+</div>
 
 # Tech Stack (Frontend)
 
@@ -97,8 +100,10 @@ and cloudfront invalidation if needed. (policy name: `GitHubActionsCloudFrontInv
 ```shell
 gh workflow run "Deploy static site to S3" # --ref main
 
+gh workflow view "Deploy static site to S3"
+
 gh workflow run "Invalidate CloudFront cache"
-# or 
+# or
 gh workflow run "Invalidate CloudFront cache" \
   -f paths="/index.html /assets/*"
 ```
