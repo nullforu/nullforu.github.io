@@ -24,6 +24,7 @@ GitHub Actions uses OIDC to assume an IAM Role without long-lived access keys.
 - `AWS_ROLE_ARN`: IAM Role ARN for OIDC (example: `arn:aws:iam::123456789012:role/gh-actions-null4u`)
 - `AWS_REGION`: AWS region (example: `ap-northeast-2`)
 - `S3_BUCKET`: Frontend artifact S3 bucket name (example: `null4u-frontend-bucket`)
+- `CLOUDFRONT_DISTRIBUTION_ID` (optional): CloudFront distribution ID for cache invalidation (example: `E1A2B3C4D5E6F7`)
 
 ## AWS Setup (IAM)
 
