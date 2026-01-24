@@ -9,8 +9,7 @@ export default ({ onOpen }: { onOpen: (id: WindowId) => void }) => (
             사이트 이용에 도움이 필요하시면 아래의 <span className='bg-yellow-200'>도움말</span>을 참고해보세요!
         </p>
         <p className='mb-1 mx-10'>
-            <span className='bg-yellow-200'>동아리 소개</span>에서 저희 동아리에 대한 정보를 확인해보실 수
-            있으며,
+            <span className='bg-yellow-200'>동아리 소개</span>에서 저희 동아리에 대한 정보를 확인해보실 수 있으며,
         </p>
         <p className='mb-4 mx-10'>
             궁금한 점이 있다면 언제든지 <span className='bg-yellow-200'>연락처</span>를 통해 문의해주세요!

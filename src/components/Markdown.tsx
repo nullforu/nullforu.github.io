@@ -59,12 +59,7 @@ export default function Markdown({ content }: { content: string }) {
                         className='block mb-2'
                         onPointerDown={(e) => e.stopPropagation()}
                     >
-                        <img
-                            src={src}
-                            alt={alt}
-                            className='max-w-full h-auto mb-2 mt-2 border border-mac-ink'
-                            loading='lazy'
-                        />
+                        <img src={src} alt={alt} className='max-w-full h-auto my-4' loading='lazy' />
                     </a>
                 ),
                 a: ({ href, children }) => (
