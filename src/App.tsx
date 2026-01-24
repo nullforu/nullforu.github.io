@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import DesktopIcon from './components/DesktopIcon'
 import MenuBar from './components/MenuBar'
@@ -217,18 +217,21 @@ function App() {
         }))
     }
 
-    const windowContent: Record<WindowId, ReactNode> = {
-        system: <SystemDiskContent onOpen={(id) => openWindow(id)} />,
-        help: <HelpContent />,
-        about: <AboutContent />,
-        curriculum: <CurriculumContent />,
-        projects: <ProjectsContent />,
-        join: <JoinContent />,
-        contact: <ContactContent />,
-        bonobono: <BonobonoContent />,
-        board: <AnonymousBoardContent />,
-        terminal: <TerminalContent />,
-    }
+    const windowContent: Record<WindowId, ReactNode> = useMemo(
+        () => ({
+            system: <SystemDiskContent onOpen={(id) => openWindow(id)} />,
+            help: <HelpContent />,
+            about: <AboutContent />,
+            curriculum: <CurriculumContent />,
+            projects: <ProjectsContent />,
+            join: <JoinContent />,
+            contact: <ContactContent />,
+            bonobono: <BonobonoContent />,
+            board: <AnonymousBoardContent />,
+            terminal: <TerminalContent />,
+        }),
+        [],
+    )
 
     useEffect(() => {
         if (!compact) return
