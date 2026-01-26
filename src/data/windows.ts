@@ -38,7 +38,7 @@ export const WINDOW_DEFINITIONS: WindowDefinition[] = [
     },
     {
         id: 'projects',
-        title: '프로젝트 & 대회',
+        title: '프로젝트',
         subtitle: 'Null4U의 프로젝트 목록입니다.',
         defaultSize: { w: 600, h: 360 },
         minSize: { w: 400, h: 280 },

@@ -169,7 +169,7 @@ const MenuBar = ({ compact, soundEnabled, onOpenWindow, onCloseAll, onResetWindo
                                     closeMenu()
                                 }}
                             >
-                                프로젝트 및 대회 기록
+                                프로젝트
                             </button>
                             <button
                                 type='button'
